@@ -14,6 +14,7 @@ const dirname = typeof __dirname !== 'undefined'
 
 export default defineConfig({
   plugins: [
+    reactRouter(),
     react(),
     svgr({
       svgrOptions: {
@@ -34,7 +35,6 @@ export default defineConfig({
     }),
     tailwindcss(),
     tsconfigPaths(),
-    reactRouter(),
     storybookTest({ configDir: path.join(dirname, '.storybook') })
   ],
   resolve: {

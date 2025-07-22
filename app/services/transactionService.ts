@@ -22,7 +22,7 @@ export const fetchTransactions = async (): Promise<Transaction[]> => {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Origin': 'http://localhost:5173'
+        'Origin': 'http://localhost:3000'
       },
       signal: controller.signal,
       mode: 'cors',
