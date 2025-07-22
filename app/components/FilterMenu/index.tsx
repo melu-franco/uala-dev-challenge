@@ -271,7 +271,7 @@ export function FilterMenu({ isOpen, onClose, onApplyFilters, onClearFilters }: 
                 </Container>
               )}
             </Container>
-            <Container className="my-6">
+            <Container className="my-6 pb-16">
               <Button
                 text="Aplicar Filtros"
                 variant="primary"
