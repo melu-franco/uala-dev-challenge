@@ -13,11 +13,11 @@ interface RawTransaction {
   paymentMethod?: string;
 }
 
-export const fetchTransactions = async (): Promise<Transaction[]> => {
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+const fetchFromAPI = async (): Promise<Transaction[]> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+  try {    
     const response = await fetch(API_URL, {
       method: 'GET',
       headers: {
@@ -32,34 +32,80 @@ export const fetchTransactions = async (): Promise<Transaction[]> => {
     clearTimeout(timeoutId);
     
     if (!response.ok) {
-      throw new Error(`Error al obtener las transacciones: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
 
     if (!data?.transactions || !Array.isArray(data.transactions)) {
-      console.error('API response does not contain transactions array:', data);
-      return [];
+      throw new Error('Invalid API response format');
     }
 
-    const transactions = data.transactions.map((item: RawTransaction) => ({
-      id: String(item.id || ''),
-      amount: Number(item.amount || 0),
-      card: String(item.card || ''),
-      installments: Number(item.installments || 1),
-      createdAt: String(item.createdAt || new Date().toISOString()),
-      updatedAt: String(item.updatedAt || new Date().toISOString()),
-      paymentMethod: item.paymentMethod || ''
-    }));
-
-    return transactions;
+    console.log('Successfully fetched from API:', data.transactions.length, 'transactions');
+    return data.transactions.map(transformTransaction).filter(Boolean) as Transaction[];
   } catch (error) {
-    if (error instanceof Error) {
-      console.error('Error fetching transactions:', error.message);
-    } else {
-      console.error('Unknown error fetching transactions:', error);
-    }
+    clearTimeout(timeoutId);
     throw error;
+  }
+};
+
+const fetchFromLocal = async (): Promise<Transaction[]> => {
+  try {    
+    const response = await fetch('/app/services/db/transactions.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      },
+      cache: 'no-cache'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Local file error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data?.transactions || !Array.isArray(data.transactions)) {
+      throw new Error('Invalid local file format');
+    }
+
+    console.log('Successfully fetched from local:', data.transactions.length, 'transactions');
+    return data.transactions.map(transformTransaction).filter(Boolean) as Transaction[];
+  } catch (error) {
+    console.error('Local fallback failed:', error);
+    throw error;
+  }
+};
+
+const transformTransaction = (item: RawTransaction): Transaction | null => {
+  if (!item) return null;
+
+  return {
+    id: String(item.id || ''),
+    amount: Number(item.amount || 0),
+    card: String(item.card || ''),
+    installments: Number(item.installments || 1),
+    createdAt: String(item.createdAt || new Date().toISOString()),
+    updatedAt: String(item.updatedAt || new Date().toISOString()),
+    paymentMethod: item.paymentMethod || ''
+  };
+};
+
+export const fetchTransactions = async (): Promise<Transaction[]> => {
+  try {
+    return await fetchFromAPI();
+  } catch (apiError) {
+    console.warn('API failed, trying local fallback...', apiError instanceof Error ? apiError.message : apiError);
+    
+    try {
+      return await fetchFromLocal();
+    } catch (localError) {
+      console.error('Both API and local fallback failed');
+      console.error('API Error:', apiError);
+      console.error('Local Error:', localError);
+      
+      throw new Error('No se pudieron cargar las transacciones. Verifica tu conexión a internet.');
+    }
   }
 };
 
