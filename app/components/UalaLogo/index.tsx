@@ -1,9 +1,9 @@
-import React from 'react';
+import type { FC } from 'react';
 import type { UalaLogoProps } from './types';
 
-export const UalaLogo: React.FC<UalaLogoProps> = ({
+export const UalaLogo: FC<UalaLogoProps> = ({
   className = '',
-  width = 120,
+  width = 80,
   height = 40
 }) => {
   return (

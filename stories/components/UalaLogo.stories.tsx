@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UalaLogo } from '../../app/components/UalaLogo/index';
+import { UalaLogo } from '../../app/components/UalaLogo';
 
 const meta: Meta<typeof UalaLogo> = {
   title: 'Components/UalaLogo',
