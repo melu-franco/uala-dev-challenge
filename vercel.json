@@ -1,6 +1,10 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "build/client",
+  "installCommand": "npm install",
+  "framework": null,
+  "functions": {},
   "routes": [
     {
       "src": "/assets/(.*)",
@@ -10,5 +14,8 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "NODE_VERSION": "22"
+  }
 }

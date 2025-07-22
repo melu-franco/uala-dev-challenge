@@ -59,9 +59,9 @@ Make sure to deploy the output of `npm run build`
 ```
 ├── package.json
 ├── package-lock.json
-├── app/
-│   ├── public/    # Static assets
-│   └── services/    # Server-side code
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
 ```
 
 ## Styling
