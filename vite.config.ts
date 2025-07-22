@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -34,16 +33,20 @@ export default defineConfig({
       }
     }),
     tailwindcss(),
+    tsconfigPaths(),
     reactRouter(),
-    tsconfigPaths()
+    storybookTest({ configDir: path.join(dirname, '.storybook') })
   ],
+  resolve: {
+    alias: {
+      '@components': path.resolve(dirname, './app/components')
+    }
+  },
   test: {
     projects: [
       {
         extends: true,
-        plugins: [
-          storybookTest({ configDir: path.join(dirname, '.storybook') })
-        ],
+        plugins: [],
         test: {
           name: 'storybook',
           browser: { enabled: true, headless: true, provider: 'playwright', instances: [{ browser: 'chromium' }] },
