@@ -1,0 +1,104 @@
+/* .react-aria-CalendarGridBody { */
+    /* td[role="gridcell"][aria-selected="true"] {
+        background-color: #007bff;
+        color: #ffffff;
+    }
+    
+    td[role="gridcell"]:hover {
+        background-color: #f3f4f6;
+    }
+    
+    td[role="gridcell"][data-pressed] {
+        background-color: #e5e7eb;
+    }
+} */
+
+table {
+    border-collapse: collapse;
+}
+
+td[role="gridcell"] {
+    color: var(--color-dark);
+}
+
+td[role="gridcell"] > div:hover {
+    cursor: pointer;
+}
+
+/* Spanish day names override */
+th.react-aria-CalendarHeaderCell:nth-child(1)::after {
+    content: "Dom";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(2)::after {
+    content: "Lun";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(3)::after {
+    content: "Mar";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(4)::after {
+    content: "Mie";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(5)::after {
+    content: "Jue";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(6)::after {
+    content: "Vie";
+}
+
+th.react-aria-CalendarHeaderCell:nth-child(7)::after {
+    content: "Sab";
+}
+
+th.react-aria-CalendarHeaderCell {
+    font-size: 0;
+}
+
+th.react-aria-CalendarHeaderCell::after {
+    font-size: 12px;
+    text-indent: 0;
+    color: var(--color-gray);
+    opacity: .5;
+    font-weight: 400;
+}
+
+/* Hide previous month days */
+td[role="gridcell"] > div[data-outside-month="true"] {
+    visibility: hidden;
+}
+
+/* Alternative approach using outside-month class if data attribute doesn't work */
+td[role="gridcell"] > div.outside-month {
+    visibility: hidden;
+}
+
+td[role="gridcell"] > div[data-selected] {
+    background: var(--color-primary-lighter);
+    color: var(--color-dark);
+    border-radius: 0;
+
+    &[data-selection-start="true"] {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    &[data-selection-end="true"] {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    &[data-selection-start="true"], 
+    &[data-selection-end="true"] {
+        width: auto;
+        color: var(--color-white);
+        background: var(--color-primary);
+        &:focus, &:hover {
+            width: auto;
+            box-shadow: none;
+        }
+    }
+}
