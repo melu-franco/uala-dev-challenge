@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Title } from '../../app/components/Title/index';
+import { Title } from '@components/Title/index';
 
-const meta = {
+const meta: Meta<typeof Title> = {
   title: 'Components/Title',
   component: Title,
   parameters: {
@@ -24,7 +24,7 @@ const meta = {
       description: 'Title content',
     },
   },
-} satisfies Meta<typeof Title>;
+};
 
 export default meta;
 type Story = StoryObj<typeof Title>;
