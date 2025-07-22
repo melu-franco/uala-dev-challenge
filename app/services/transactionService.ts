@@ -51,7 +51,7 @@ const fetchFromAPI = async (): Promise<Transaction[]> => {
 
 const fetchFromLocal = async (): Promise<Transaction[]> => {
   try {    
-    const response = await fetch('/app/services/db/transactions.json', {
+    const response = await fetch('/db/transactions.json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json'
