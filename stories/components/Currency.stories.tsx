@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Currency } from '../../app/components/Currency/index';
+import { Currency } from '@components/Currency/index';
 
-const meta = {
+const meta: Meta<typeof Currency> = {
   title: 'Components/Currency',
   component: Currency,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Currency>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

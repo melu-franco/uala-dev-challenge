@@ -6,4 +6,5 @@ export interface CurrencyProps {
   size?: 'sm' | 'lg';
   showSign?: boolean;
   color?: 'dark' | 'success';
+  bold?: boolean;
 }

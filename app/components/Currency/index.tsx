@@ -7,6 +7,7 @@ export const Currency: FC<CurrencyProps> = ({
   size = 'sm',
   showSign = false,
   color = 'dark',
+  bold = false,
 }) => {
   const formatAmount = (num: number) => {
     const [int, dec = '00'] = num.toFixed(2).split('.');
@@ -38,7 +39,7 @@ export const Currency: FC<CurrencyProps> = ({
     success: 'text-success',
   };
 
-  const baseClasses = `${sizeClasses[size]} ${colorClasses[color]} ${className}`;
+  const baseClasses = `${sizeClasses[size]} ${colorClasses[color]} ${bold ? 'font-bold' : ''} ${className}`;
   const decimalClasses = size === 'lg' ? 'text-[24px]' : '';
 
   return (
