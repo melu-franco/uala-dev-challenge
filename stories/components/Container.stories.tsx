@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Container from '../../app/components/Container/index';
+import { Container } from '@components/Container/index';
 
-const meta = {
+const meta: Meta<typeof Container> = {
   title: 'Components/Container',
   component: Container,
   parameters: {
@@ -55,14 +55,23 @@ const meta = {
     wrap: {
       control: 'boolean',
     },
+    border: {
+      control: 'boolean',
+      description: 'Add a rounded border to the container',
+    },
+    borderColor: {
+      control: 'select',
+      options: ['gray', 'primary'],
+      description: 'Color of the border when border is true',
+    },
   },
-} satisfies Meta<typeof Container>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultContent = (
-  <div className="bg-gray-200 p-4 text-center">Example Content</div>
+  <div className="p-4 text-center">Example Content</div>
 );
 
 export const Default: Story = {
@@ -107,11 +116,11 @@ export const WithFlex: Story = {
     justify: 'between',
     align: 'center',
     padding: 'md',
-    gap: "4\n"
+    gap: '4',
   },
 };
 
-export const FlexColumn: Story = {
+export const WithFlexColumn: Story = {
   render: (args) => (
     <Container {...args}>
       {defaultContent}
@@ -129,7 +138,7 @@ export const FlexColumn: Story = {
   },
 };
 
-export const CustomMaxWidth: Story = {
+export const WithMaxWidth: Story = {
   render: (args) => (
     <Container {...args}>
       {defaultContent}
@@ -140,5 +149,28 @@ export const CustomMaxWidth: Story = {
   args: {
     maxWidth: '400px',
     padding: 'md',
+  },
+};
+
+export const WithBorder: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-4">
+      <Container {...args} border borderColor="gray">
+        {defaultContent}
+      </Container>
+      <Container {...args} border borderColor="primary">
+        {defaultContent}
+      </Container>
+    </div>
+  ),
+  args: {
+    padding: 'md',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Container can have a rounded border with gray or primary color.',
+      },
+    },
   },
 };
