@@ -271,9 +271,6 @@ export function FilterMenu({ isOpen, onClose, onApplyFilters, onClearFilters }: 
                 </Container>
               )}
             </Container>
-          </Container>
-
-          <Container>
             <Container className="my-6">
               <Button
                 text="Aplicar Filtros"
@@ -284,6 +281,7 @@ export function FilterMenu({ isOpen, onClose, onApplyFilters, onClearFilters }: 
               />
             </Container>
           </Container>
+
         </Container>
       </Container>
     </>
