@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Icon } from '../../app/components/Icon/index';
-import { icons } from '../../app/components/Icon/icons';
+import { Icon } from '@components/Icon/index';
+import { icons } from '@components/Icon/icons';
 
-const meta = {
+const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
   component: Icon,
   parameters: {
@@ -18,17 +18,10 @@ const meta = {
       control: { type: 'number', min: 16, max: 64, step: 4 },
     },
   },
-} satisfies Meta<typeof Icon>;
+};
 
 export default meta;
 type Story = StoryObj<typeof Icon>;
-
-export const Default: Story = {
-  args: {
-    name: 'filter',
-    size: 24,
-  },
-};
 
 export const AllIcons: Story = {
   render: () => (
