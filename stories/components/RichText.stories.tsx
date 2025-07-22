@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { RichText } from '../../app/components/RichText/index';
+import { RichText } from '../../app/components/RichText';
 
-const meta = {
+const meta: Meta<typeof RichText> = {
   title: 'Components/RichText',
   component: RichText,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof RichText>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -30,25 +30,23 @@ export const Bold: Story = {
   },
 };
 
-export const IconLinkLeft: Story = {
+export const WithIconLeft: Story = {
   args: {
-    content: 'Link con ícono a la izquierda',
-    color: 'primary',
+    content: 'Texto con ícono a la izquierda',
+    color: 'dark',
     size: 'md',
     icon: 'analyze',
     iconPosition: 'left',
-    href: '#',
   },
 };
 
-export const IconLink: Story = {
+export const WithIconRight: Story = {
   args: {
-    content: 'Link con ícono a la derecha',
-    color: 'primary',
+    content: 'Texto con ícono a la derecha',
+    color: 'dark',
     size: 'md',
     icon: 'chevron',
     iconPosition: 'right',
-    href: '#',
   },
 };
 
@@ -64,7 +62,7 @@ export const Sizes: Story = {
       <RichText {...args} content="Texto grande" size="lg" />
       <RichText {...args} content="Texto mediano negrita" size="md" bold />
       <RichText {...args} content="Texto con ícono" size="md" icon="analyze" />
-      <RichText {...args} content="Link con ícono" size="md" icon="chevron" iconPosition="right" href="#" color="primary" />
+      <RichText {...args} content="Texto con ícono derecha" size="md" icon="chevron" iconPosition="right" color="primary" />
     </div>
   ),
 };
@@ -87,30 +85,4 @@ export const Colors: Story = {
   ),
 };
 
-export const Links: Story = {
-  args: {
-    content: 'Link de ejemplo',
-    size: 'md',
-  },
-  render: (args) => (
-    <div className="flex flex-col gap-4">
-      <RichText 
-        {...args} 
-        content="Link interno" 
-        href="#"
-        color="primary"
-        icon="analyze"
-        iconPosition="left"
-      />
-      <RichText 
-        {...args} 
-        content="Link externo" 
-        href="https://example.com"
-        external
-        color="primary"
-        icon="chevron"
-        iconPosition="right"
-      />
-    </div>
-  ),
-};
+
