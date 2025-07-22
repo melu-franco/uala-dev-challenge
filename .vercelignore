@@ -1,0 +1,10 @@
+# Vercel ignore file
+node_modules
+.env.local
+.env.*.local
+build/server
+.storybook
+storybook-static
+coverage
+.nyc_output
+*.log

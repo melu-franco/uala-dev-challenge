@@ -21,8 +21,7 @@ export const fetchTransactions = async (): Promise<Transaction[]> => {
     const response = await fetch(API_URL, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-        'Origin': 'http://localhost:3000'
+        'Accept': 'application/json'
       },
       signal: controller.signal,
       mode: 'cors',
