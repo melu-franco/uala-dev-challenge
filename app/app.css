@@ -1,3 +1,5 @@
+@import "tailwindcss";
+@import "nouislider/distribute/nouislider.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,16 +12,20 @@
 
   html,
   body {
-    background-color: white;
+    background-color: var(--color-background-light);
     font-family: var(--font-sans);
   }
 }
 
 @theme {
   --color-primary: #022A9A;
+  --color-primary-lighter: #E0EDFF;
   --color-dark: #313643;
   --color-success: #1C8367;
   --color-gray: #565656;
+  --color-light-gray: #E5E5E5;
   --color-neutral: #606882;
+  --color-neutral-lighter: #B7BFD3;
   --color-white: #FFFFFF;
+  --color-background-light: #FAFAFA;
 }

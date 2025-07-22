@@ -8,6 +8,9 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { Header } from './components/Header';
+import { Container } from './components/Container';
+import { HEADER_HEIGHT } from './constants';
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -23,7 +26,7 @@ export const links: Route.LinksFunction = () => [
   }
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export default function App() {
   return (
     <html lang="es">
       <head>
@@ -33,16 +36,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Container flex direction="col" className="min-h-screen bg-gray-50">
+          <Header />
+          <Container className={`flex-1 pt-[56px]`}>
+            <Outlet />
+          </Container>
+        </Container>
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
   );
-}
-
-export default function App() {
-  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
